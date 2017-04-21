@@ -112,3 +112,16 @@ func (s Sqlite3) MigrationLogDeleteSql() string {
 func (s Sqlite3) GetMigrationCommands(sql string) []string {
 	return []string{sql}
 }
+
+// REDSHIFT
+
+type Redshift struct {
+	Postgres
+}
+
+func (p Redshift) CreateMigrationTableSql() string {
+	return `CREATE TABLE gomigrate (
+                  id           IDENTITY(0,1) PRIMARY KEY,
+                  migration_id BIGINT        UNIQUE NOT NULL
+                )`
+}
